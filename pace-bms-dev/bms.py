@@ -29,6 +29,11 @@ elif os.path.exists('pace-bms-dev\\config.yaml'):
     with open(r'pace-bms-dev\\config.yaml') as file:
         config = yaml.load(file, Loader=yaml.FullLoader)['options']
         
+elif os.path.exists('config.yaml'):
+    print("Loading config.yaml")
+    with open(r'config.yaml') as file:
+        config = yaml.load(file, Loader=yaml.FullLoader)['options']
+
 else:
     sys.exit("No config file found")  
 
