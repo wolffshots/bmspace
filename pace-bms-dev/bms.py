@@ -1162,10 +1162,17 @@ while code_running == True:
                 print_initial = True
         
         else: #MQTT not connected
-            client.loop_stop()
             print("MQTT disconnected, trying to reconnect...")
-            client.connect(config['mqtt_host'], config['mqtt_port'], 60)
-            client.loop_start()
+            try:
+                client.loop_stop()
+            except(Exception):
+                print("Couldn't stop loop (possibly not started?)")
+            try:
+                client.connect(config['mqtt_host'], config['mqtt_port'], 60)
+                client.loop_start()
+            except(Exception):
+                print("Couldn't reconnect, sleeping and trying again")
+                time.sleep(25)
             time.sleep(5)
             print_initial = True
     else: #BMS not connected
