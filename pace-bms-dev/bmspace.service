@@ -3,6 +3,7 @@ Description = monitor app for Pace BMS
 After = network.target
 
 [Service]
+Environment=PYTHONUNBUFFERED=1
 ExecStart = python3 /usr/bin/bmspace/bms.py
 WorkingDirectory = /usr/bin/bmspace/
 Type = simple
